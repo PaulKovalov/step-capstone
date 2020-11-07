@@ -30,7 +30,7 @@ public class RedirectFilter implements Filter {
     ServletContext context = config.getServletContext();
     HttpServletRequest httpRequest = (HttpServletRequest) request;
     // if request is not to API, forward it to 'index.html', otherwise do nothing
-    if (!isApiUri(httpRequest.getRequestURI().toString())) {
+    if (!isApiUri(httpRequest.getRequestURI())) {
       // request to angular, forward it to the index.html
       RequestDispatcher dispatcher = context.getRequestDispatcher("/index.html");
       dispatcher.forward(request, response);
