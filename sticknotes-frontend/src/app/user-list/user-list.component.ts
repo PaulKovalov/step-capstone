@@ -86,16 +86,16 @@ export class UserListComponent implements OnInit, OnDestroy {
    * 
    * @param activeIdSet 
    * with a given activeIdSet returns comparator function that:
-   * decides a < b if a is owner or is active and b is not active
-   * decides b > a if b is owner or is active and a is not active
+   * decides a < b if a is active and b is not active
+   * decides b > a if b is active and a is not active
    * decides a == b in any other case
    */
   private compUsers(activeIdSet){
     return function(a, b){
-      if(a.role === UserRole.OWNER || (activeIdSet.has(Number(a.id)) && !activeIdSet.has(Number(b.id)))){
+      if (activeIdSet.has(Number(a.id)) && !activeIdSet.has(Number(b.id))) {
         return -1;
       }
-      else if(b.role === UserRole.OWNER || (activeIdSet.has(Number(b.id)) && !activeIdSet.has(Number(a.id)))){
+      else if (activeIdSet.has(Number(b.id)) && !activeIdSet.has(Number(a.id))) {
         return 1;
       }
       return 0;
