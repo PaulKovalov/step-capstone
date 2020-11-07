@@ -1,17 +1,16 @@
 // Copyright 2020 Google LLC
 
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CdkDragEnd, CdkDragStart } from '@angular/cdk/drag-drop';
 import { Vector2 } from '../utility/vector';
 import { getTranslateValues } from '../utility/util';
-import { Note, Board, UserBoardRole, User, BoardGridLine } from '../interfaces';
+import { Board, BoardGridLine, Note, User, UserBoardRole } from '../interfaces';
 import { NewNoteComponent } from '../new-note/new-note.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { NotesApiService } from '../services/notes-api.service';
 import { State } from '../enums/state.enum';
 import { LiveUpdatesService } from '../services/live-updates.service';
-import _ from 'lodash';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BoardUsersApiService } from '../services/board-users-api.service';
 import { UserService } from '../services/user.service';
@@ -21,6 +20,7 @@ import { BoardApiService } from '../services/board-api.service';
 import { BoardGridLineType } from '../enums/board-grid-line-type.enum';
 import { NewGridLineComponent } from '../new-grid-line/new-grid-line.component';
 import { BoardStyles } from '../utility/board-styles';
+
 /**
  * Component for displaying grid and notes
  */
@@ -49,7 +49,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   /**
    * Setter of the columns div reference
    */
-  @ViewChild('columnsDiv', { read: ElementRef, static: false }) set columnsDivRefSetter(data: any) {
+  @ViewChild('columnsDiv', {read: ElementRef, static: false}) set columnsDivRefSetter(data: any) {
     this.columnsDivRef = data;
   }
 
@@ -240,7 +240,7 @@ export class BoardComponent implements OnInit, OnDestroy {
    */
   public openNewNoteDialog(x: number, y: number): void {
     this.dialog.open(NewNoteComponent, {
-      data: { mode: State.CREATE, noteData: { position: new Vector2(x, y), boardId: this.board.id } }
+      data: {mode: State.CREATE, noteData: {position: new Vector2(x, y), boardId: this.board.id}}
     });
   }
 
@@ -249,7 +249,7 @@ export class BoardComponent implements OnInit, OnDestroy {
    */
   public openEditNoteDialog(note: Note): void {
     this.dialog.open(NewNoteComponent, {
-      data: { mode: State.EDIT, noteData: note }
+      data: {mode: State.EDIT, noteData: note}
     });
   }
 
@@ -273,7 +273,7 @@ export class BoardComponent implements OnInit, OnDestroy {
    */
   public openNewColumnDialog(rangeStart: number): void {
     this.dialog.open(NewGridLineComponent, {
-      data: { boardId: this.board.id, rangeStart: rangeStart, type: BoardGridLineType.COLUMN, mode: State.CREATE}
+      data: {boardId: this.board.id, rangeStart: rangeStart, type: BoardGridLineType.COLUMN, mode: State.CREATE}
     });
   }
 
@@ -321,8 +321,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   public shrinkedLeft(column: BoardGridLine): BoardGridLine {
     // copy all fields of column to a new object
     const newColumn = {...column};
-    const newRangeStart = column.rangeStart + 1;
-    newColumn.rangeStart = newRangeStart;
+    newColumn.rangeStart = column.rangeStart + 1;
     return newColumn;
   }
 
@@ -332,8 +331,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   public shrinkedRight(column: BoardGridLine): BoardGridLine {
     // copy all fields of column to a new object
     const newColumn = {...column};
-    const newRangeEnd = column.rangeEnd - 1;
-    newColumn.rangeEnd = newRangeEnd;
+    newColumn.rangeEnd = column.rangeEnd - 1;
     return newColumn;
   }
 
@@ -343,8 +341,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   public expandedLeft(column: BoardGridLine): BoardGridLine {
     // copy all fields of column to a new object
     const newColumn = {...column};
-    const newRangeStart = column.rangeStart - 1;
-    newColumn.rangeStart = newRangeStart;
+    newColumn.rangeStart = column.rangeStart - 1;
     return newColumn;
   }
 
@@ -354,8 +351,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   public expandedRight(column: BoardGridLine): BoardGridLine {
     // copy all fields of column to a new object
     const newColumn = {...column};
-    const newRangeEnd = column.rangeEnd + 1;
-    newColumn.rangeEnd = newRangeEnd;
+    newColumn.rangeEnd = column.rangeEnd + 1;
     return newColumn;
   }
 
@@ -364,11 +360,10 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Syncronizes scroll values of the board and board header
+   * Synchronizes scroll values of the board and board header
    */
   public boardScrolled(event: any): void {
-    const scroll = event.srcElement.scrollLeft;
-    this.columnsDivRef.nativeElement.scrollLeft = scroll;
+    this.columnsDivRef.nativeElement.scrollLeft = event.srcElement.scrollLeft;
   }
 
   /**

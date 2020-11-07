@@ -1,6 +1,6 @@
 // Copyright 2020 Google LLC
 
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Vector2 } from '../utility/vector';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -79,9 +79,6 @@ export class NewNoteComponent {
     }
   }
 
-  ngOnInit(): void {
-  }
-
   /**
    * Creates new note
    */
@@ -126,7 +123,7 @@ export class NewNoteComponent {
       this.sendingData = true;
       // update editableNote object fields
       this.editableNote.content = this.newNoteForm.controls.content.value;
-      this.editableNote.color = this.getColorHexValue(this.newNoteForm.controls.options.value);
+      this.editableNote.color = this.getColorHexValue(this.newNoteForm.controls.colors.value);
       const fileInput = this.newNoteForm.controls.file.value;
       // save image if it is there
       if (fileInput && fileInput.files.length) {
