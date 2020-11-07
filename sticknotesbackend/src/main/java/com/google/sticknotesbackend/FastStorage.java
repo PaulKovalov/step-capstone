@@ -92,7 +92,7 @@ public class FastStorage extends LocalCacheManager{
 
   /**
    * Removes board with given id from cache and from datastore
-   * @param boardId
+   * @param board
    */
   public static void removeBoard(Whiteboard board) {
     Cache cache = getCacheInstance();

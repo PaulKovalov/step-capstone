@@ -22,8 +22,7 @@ public class JsonParsers {
   public static Gson getBoardGsonParser() {
     GsonBuilder gson = new GsonBuilder();
     gson.registerTypeAdapter(Whiteboard.class, new WhiteboardSerializer());
-    Gson parser = gson.create();
-    return parser;
+    return gson.create();
   }
 
   /**
@@ -33,8 +32,7 @@ public class JsonParsers {
   public static Gson getNoteGsonParser() {
     GsonBuilder gson = new GsonBuilder();
     gson.registerTypeAdapter(Note.class, new NoteSerializer());
-    Gson parser = gson.create();
-    return parser;
+    return gson.create();
   }
   /**
    * Generates a Gson object that uses custom WhiteboardPreviewSerializer
@@ -42,8 +40,7 @@ public class JsonParsers {
   public static Gson getBoardPreviewGsonParser() {
     GsonBuilder gson = new GsonBuilder();
     gson.registerTypeAdapter(Whiteboard.class, new WhiteboardPreviewSerializer());
-    Gson parser = gson.create();
-    return parser;
+    return gson.create();
   }
 
   /**
@@ -53,8 +50,7 @@ public class JsonParsers {
   public static Gson getBoardUpdateGsonParser() {
     GsonBuilder gson = new GsonBuilder();
     gson.registerTypeAdapter(Whiteboard.class, new WhiteboardWithoutNotesSerializer());
-    Gson parser = gson.create();
-    return parser;
+    return gson.create();
   }
 
   /**
@@ -64,7 +60,6 @@ public class JsonParsers {
   public static Gson getBoardRoleGsonParser() {
     GsonBuilder gson = new GsonBuilder();
     gson.registerTypeAdapter(UserBoardRole.class, new UserBoardRoleSerializer());
-    Gson parser = gson.create();
-    return parser;
+    return gson.create();
   }
 }
